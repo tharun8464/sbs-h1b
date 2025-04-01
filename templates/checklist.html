@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <title>Your Checklist - H1B Portal</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="background-overlay"></div>
     <header>
-        <div class="logo-container">
-            <img src="{{ url_for('static', filename='logo.png') }}" alt="SBS Corp Logo" class="logo">
+        <div class="Dashboard-image">
+            <img src="{{ url_for('static', filename='sbs.png') }}" alt="SBS Corp Logo" class="Dashboardimage">
         </div>
         <h1>Welcome, {{ user[0] }} {{ user[1] }}</h1>
         <p class="tagline">Your H1B Checklist</p>

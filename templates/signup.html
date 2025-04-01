@@ -5,12 +5,12 @@
     <title>Sign Up - H1B Portal</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
-</head>
+<head>
 <body>
     <div class="background-overlay"></div>
     <header>
         <div class="logo-container">
-            <img src="{{ url_for('static', filename='logo.png') }}" alt="SBS Corp Logo" class="logo">
+            <img src="{{ url_for('static', filename='sbs.png') }}" alt="SBS Corp Logo" class="logo">
         </div>
         <h1>Sign Up</h1>
         <p class="tagline">Create Your H1B Account</p>
@@ -25,26 +25,25 @@
             <form method="POST" action="/signup" class="submission-form">
                 <div class="form-group">
                     <label for="first_name">First Name</label>
-                    <input type="text" id="first_name" name="first_name" required placeholder="Enter first name" class="input-field">
+                    <input type="text" id="first_name" name="first_name" required placeholder="Enter first name" class="input-field" pattern="[a-zA-Z ]+" title="Only letters and spaces allowed">
                 </div>
                 <div class="form-group">
                     <label for="last_name">Last Name</label>
-                    <input type="text" id="last_name" name="last_name" required placeholder="Enter last name" class="input-field">
+                    <input type="text" id="last_name" name="last_name" required placeholder="Enter last name" class="input-field" pattern="[a-zA-Z ]+" title="Only letters and spaces allowed">
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required placeholder="Enter your email" class="input-field">
+                    <input type="email" id="email" name="email" required placeholder="Enter your email" class="input-field" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Invalid email format">
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required placeholder="Create a password" class="input-field">
+                    <input type="password" id="password" name="password" required placeholder="Create a password" class="input-field" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" title="Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number and one special character">
                 </div>
                 <button type="submit" class="submit-btn">Sign Up</button>
             </form>
         </div>
     </main>
     <footer>
-        <p>© 2025 SBS Corp. All Rights Reserved.</p>
+        <p> 2025 SBS Corp. All Rights Reserved.</p>
     </footer>
 </body>
-</html>
