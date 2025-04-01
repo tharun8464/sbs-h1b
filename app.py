@@ -26,10 +26,10 @@ def init_db():
     conn.commit()
     conn.close()
 
-# Home Route (Root)
+# ✅ Home Route (Landing Page)
 @app.route("/")
 def home():
-    return redirect(url_for("login"))
+    return render_template("home.html")
 
 # Signup Page
 @app.route("/signup", methods=["GET", "POST"])
@@ -185,7 +185,7 @@ def admin_upload(user_id):
     flash("Document sent to candidate!")
     return redirect(url_for("dashboard"))
 
-# ⬇️ Render-friendly entry point
+# Run app (Render-compatible)
 if __name__ == "__main__":
     if not os.path.exists(UPLOAD_FOLDER):
         os.makedirs(UPLOAD_FOLDER)
