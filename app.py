@@ -67,7 +67,15 @@ def login():
             return redirect(url_for("checklist"))
         flash("Invalid email or password!")
     return render_template("login.html")
+# Home Route (Root)
+@app.route("/")
+def home():
+    return redirect(url_for("login"))
 
+# Checklist Page (Candidate)
+@app.route("/checklist")
+def checklist():
+    ...
 # Checklist Page (Candidate)
 @app.route("/checklist")
 def checklist():
@@ -181,6 +189,9 @@ def admin_upload(user_id):
     return redirect(url_for("dashboard"))
 
 # ⬇️ Render-friendly entry point
+@app.route("/")
+def home():
+    return redirect(url_for("login"))  # or "signup" if you want
 if __name__ == "__main__":
     if not os.path.exists(UPLOAD_FOLDER):
         os.makedirs(UPLOAD_FOLDER)
