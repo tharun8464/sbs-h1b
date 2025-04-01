@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up - H1B Portal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-overlay"></div>
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="SBS Corp Logo" class="logo">
+        </div>
+        <h1>Sign Up</h1>
+        <p class="tagline">Create Your H1B Account</p>
+    </header>
+    <main>
+        <div class="glass-container">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="success-message">{{ messages[0] }}</div>
+                {% endif %}
+            {% endwith %}
+            <form method="POST" action="/signup" class="submission-form">
+                <div class="form-group">
+                    <label for="first_name">First Name</label>
+                    <input type="text" id="first_name" name="first_name" required placeholder="Enter first name" class="input-field">
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" id="last_name" name="last_name" required placeholder="Enter last name" class="input-field">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email" class="input-field">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required placeholder="Create a password" class="input-field">
+                </div>
+                <button type="submit" class="submit-btn">Sign Up</button>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <p>© 2025 SBS Corp. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

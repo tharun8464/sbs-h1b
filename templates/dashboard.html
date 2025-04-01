@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard - H1B Portal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-overlay"></div>
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="SBS Corp Logo" class="logo">
+        </div>
+        <h1>Admin Dashboard</h1>
+        <p class="tagline">Manage H1B Candidates</p>
+    </header>
+    <main>
+        <div class="glass-container">
+            <h3>Candidates</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Documents</th>
+                        <th>Send Document</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for candidate in candidates %}
+                    <tr>
+                        <td>{{ candidate[0] }}</td>
+                        <td>{{ candidate[1] }} {{ candidate[2] }}</td>
+                        <td>{{ candidate[3] }}</td>
+                        <td class="{{ candidate[4]|lower }}">{{ candidate[4] }}</td>
+                        <td>
+                            {% if candidate[0] in docs %}
+                                <ul>
+                                    {% for doc in docs[candidate[0]] %}
+                                        <li>{{ doc[0] }} - {{ doc[1] }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <p>No documents uploaded</p>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <form method="POST" action="/admin_upload/{{ candidate[0] }}" enctype="multipart/form-data">
+                                <input type="file" name="file" class="file-input" required>
+                                <button type="submit" class="submit-btn">Send</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <footer>
+        <p>© 2025 SBS Corp. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

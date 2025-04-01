@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Checklist - H1B Portal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-overlay"></div>
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="SBS Corp Logo" class="logo">
+        </div>
+        <h1>Welcome, {{ user[0] }} {{ user[1] }}</h1>
+        <p class="tagline">Your H1B Checklist</p>
+    </header>
+    <main>
+        <div class="glass-container">
+            <div class="checklist">
+                <h3>Your Documents</h3>
+                <form id="checklistForm" method="POST" action="/submit" enctype="multipart/form-data">
+                    <ul>
+                        <li><span class="check">✔</span> Proof of Educational Qualifications* {% if "education" in docs %} - {{ docs["education"] }} {% else %} - Pending {% endif %} <input type="file" name="education" class="file-input" onchange="uploadFile(this, 'education')">
+                            <ul><li>Copy of degree(s)</li><li>Official/unofficial transcripts</li><li>Credential evaluation (if non-U.S.)</li></ul></li>
+                        <li><span class="check">✔</span> Resume/CV* {% if "resume" in docs %} - {{ docs["resume"] }} {% else %} - Pending {% endif %} <input type="file" name="resume" class="file-input" onchange="uploadFile(this, 'resume')"></li>
+                        <li><span class="check">✔</span> Passport first and last page* {% if "passport" in docs %} - {{ docs["passport"] }} {% else %} - Pending {% endif %} <input type="file" name="passport" class="file-input" onchange="uploadFile(this, 'passport')"></li>
+                        <li><span class="check">✔</span> Employment Documentation* {% if "work_exp" in docs %} - {{ docs["work_exp"] }} {% else %} - Pending {% endif %} <input type="file" name="work_exp" class="file-input" onchange="uploadFile(this, 'work_exp')"></li>
+                        <li><span class="check">✔</span> Job Duties with %* {% if "job_duties" in docs %} - {{ docs["job_duties"] }} {% else %} - Pending {% endif %} <input type="file" name="job_duties" class="file-input" onchange="uploadFile(this, 'job_duties')">
+                            <a href="{{ url_for('static', filename='sample_job_duties.pdf') }}" target="_blank" class="sample-link">[Sample]</a></li>
+                        <li><span class="check">✔</span> I-94 (if applicable) {% if "i94" in docs %} - {{ docs["i94"] }} {% else %} - Pending {% endif %} <input type="file" name="i94" class="file-input" onchange="uploadFile(this, 'i94')"></li>
+                        <li><span class="check">✔</span> Other Certifications {% if "other" in docs %} - {{ docs["other"] }} {% else %} - Pending {% endif %} <input type="file" name="other" class="file-input" onchange="uploadFile(this, 'other')"></li>
+                    </ul>
+                    <button type="submit" class="submit-btn">Submit</button>
+                </form>
+            </div>
+            {% if admin_docs %}
+            <div class="checklist">
+                <h3>Documents from Admin</h3>
+                <ul>
+                    {% for doc in admin_docs %}
+                    <li><span class="check">✔</span> {{ doc[0] }} - <a href="/{{ doc[1] }}" target="_blank" class="sample-link">Download</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+    </main>
+    <footer>
+        <p>© 2025 SBS Corp. All Rights Reserved.</p>
+    </footer>
+    <script>
+        function uploadFile(input, docType) {
+            const file = input.files[0];
+            if (file) {
+                const formData = new FormData();
+                formData.append(docType, file);
+                fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        location.reload();
+                    } else {
+                        alert('Upload failed!');
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>
