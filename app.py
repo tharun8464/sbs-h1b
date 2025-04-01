@@ -180,8 +180,10 @@ def admin_upload(user_id):
     flash("Document sent to candidate!")
     return redirect(url_for("dashboard"))
 
+# ⬇️ Render-friendly entry point
 if __name__ == "__main__":
     if not os.path.exists(UPLOAD_FOLDER):
         os.makedirs(UPLOAD_FOLDER)
     init_db()
-    app.run(debug=True, port=5003)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(debug=False, host="0.0.0.0", port=port)
