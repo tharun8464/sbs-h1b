@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome - H1B Portal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-overlay"></div>
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="SBS Corp Logo" class="logo">
+        </div>
+        <h1>Welcome to H1B Portal</h1>
+        <p class="tagline">Manage your H1B documentation easily</p>
+    </header>
+    <main>
+        <div class="glass-container">
+            <p class="tagline" style="margin-bottom: 20px;">New here or already registered?</p>
+            <div style="display: flex; justify-content: center; gap: 20px;">
+                <a href="{{ url_for('signup') }}" class="submit-btn">Sign Up</a>
+                <a href="{{ url_for('login') }}" class="submit-btn">Log In</a>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>© 2025 SBS Corp. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
